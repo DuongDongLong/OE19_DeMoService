@@ -2,21 +2,18 @@ package com.example.jiren.demostartedservice.fragment;
 
 import android.content.Context;
 import android.os.Bundle;
-import android.os.Environment;
-import android.provider.MediaStore;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.Toast;
+import com.example.jiren.demostartedservice.interface_app.OnFragmentInteractionListener;
 import com.example.jiren.demostartedservice.MainActivity;
 import com.example.jiren.demostartedservice.R;
-import com.example.jiren.demostartedservice.adapter.ListFileAdapter;
 import com.example.jiren.demostartedservice.adapter.ListSongAdapter;
 import com.example.jiren.demostartedservice.object.Song;
-import java.io.File;
-import java.util.ArrayList;
 import java.util.List;
 
 public class ListSongFragment extends Fragment {
@@ -60,7 +57,6 @@ public class ListSongFragment extends Fragment {
         mListener = null;
     }
 
-    public interface OnFragmentInteractionListener {
-        void onFragmentInteraction(int value1);
-    }
+
+
 }

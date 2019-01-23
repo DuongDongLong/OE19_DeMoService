@@ -3,28 +3,27 @@ package com.example.jiren.demostartedservice.adapter;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
-import com.example.jiren.demostartedservice.fragment.ListSongFragment;
-import com.example.jiren.demostartedservice.fragment.RootFragment;
+import java.util.ArrayList;
+import java.util.List;
 
 public class ViewPagerAdapter extends FragmentPagerAdapter {
-    static final int NUM_ITEMS = 2;
-
+    List<Fragment> mFragmentList;
     public ViewPagerAdapter(FragmentManager fm) {
         super(fm);
+        mFragmentList= new ArrayList<>();
     }
 
     @Override
     public Fragment getItem(int i) {
-        if (i == 0) {
-            return new ListSongFragment();
-        } else {
-            return new RootFragment();
-        }
+        return mFragmentList.get(i);
     }
-
     @Override
     public int getCount() {
-        return NUM_ITEMS;
+        return mFragmentList.size();
+    }
+
+    public void addFragment(Fragment fragment){
+        mFragmentList.add(fragment);
     }
 
 }

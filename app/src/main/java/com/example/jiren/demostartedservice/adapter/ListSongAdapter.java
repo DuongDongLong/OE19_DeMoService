@@ -5,6 +5,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.ImageView;
 import android.widget.TextView;
 import com.example.jiren.demostartedservice.R;
 import com.example.jiren.demostartedservice.object.Song;
@@ -41,9 +42,10 @@ public class ListSongAdapter extends BaseAdapter {
         LayoutInflater layoutInflater=
                 (LayoutInflater) mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         convertView=layoutInflater.inflate(mlayout,null);
-
+        ImageView img=convertView.findViewById(R.id.profile_image);
         TextView tvSinger=convertView.findViewById(R.id.tv_Singer);
         TextView tvAuthor=convertView.findViewById(R.id.tv_Author);
+        img.setImageBitmap(arrItemObjects.get(position).getImgSong());
         tvSinger.setText(arrItemObjects.get(position).getSongName());
         tvAuthor.setText(arrItemObjects.get(position).getSinger());
         return convertView;

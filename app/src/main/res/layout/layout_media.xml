@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/ll_Media"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical"
@@ -17,8 +18,8 @@
             android:layout_height="wrap_content"
             android:layout_weight="1.2"
             android:gravity="center_vertical"
-            android:textColor="#ffffff"
             android:text="00:00"
+            android:textColor="#ffffff"
             />
         <SeekBar
             android:id="@+id/sb_Process"
@@ -35,14 +36,13 @@
             android:layout_height="wrap_content"
             android:layout_weight="1.2"
             android:gravity="center_vertical"
-            android:textColor="#ffffff"
             android:text="00:00"
+            android:textColor="#ffffff"
             />
     </LinearLayout>
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingBottom="20dp"
         >
         <LinearLayout
             android:layout_width="0dp"
@@ -56,7 +56,7 @@
                 android:layout_marginBottom="5dp"
                 android:layout_marginLeft="10dp"
                 android:layout_marginTop="5dp"
-                android:src="@drawable/shuffle_w"
+                android:src="@drawable/shuffle1_w"
                 />
         </LinearLayout>
         <LinearLayout
@@ -71,7 +71,7 @@
                 android:layout_height="30dp"
                 android:layout_marginBottom="5dp"
                 android:layout_marginTop="5dp"
-                android:src="@drawable/back_w"
+                android:src="@drawable/back_w1"
                 />
         </LinearLayout>
         <LinearLayout
@@ -84,7 +84,7 @@
                 android:id="@+id/img_Restart"
                 android:layout_width="40dp"
                 android:layout_height="40dp"
-                android:src="@drawable/pause_w"
+                android:src="@drawable/pause_w1"
                 />
         </LinearLayout>
         <LinearLayout
@@ -99,7 +99,7 @@
                 android:layout_height="30dp"
                 android:layout_marginBottom="5dp"
                 android:layout_marginTop="5dp"
-                android:src="@drawable/next_w"
+                android:src="@drawable/next_w1"
                 />
         </LinearLayout>
         <LinearLayout
@@ -115,7 +115,7 @@
                 android:layout_marginBottom="5dp"
                 android:layout_marginRight="10dp"
                 android:layout_marginTop="5dp"
-                android:src="@drawable/repeat_w"
+                android:src="@drawable/repeat_w1"
                 />
         </LinearLayout>
 

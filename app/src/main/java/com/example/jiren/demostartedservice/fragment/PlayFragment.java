@@ -2,6 +2,7 @@ package com.example.jiren.demostartedservice.fragment;
 
 import android.animation.ObjectAnimator;
 import android.animation.ValueAnimator;
+import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
@@ -15,22 +16,27 @@ import android.widget.TextView;
 import com.azoft.carousellayoutmanager.CarouselLayoutManager;
 import com.azoft.carousellayoutmanager.CarouselZoomPostLayoutListener;
 import com.azoft.carousellayoutmanager.CenterScrollListener;
+import com.example.jiren.demostartedservice.interface_app.ChangViewPager;
 import com.example.jiren.demostartedservice.MainActivity;
 import com.example.jiren.demostartedservice.R;
 import com.example.jiren.demostartedservice.adapter.SongRecyclerViewAdapter;
+import com.example.jiren.demostartedservice.interface_app.NextBackMedia;
 import com.example.jiren.demostartedservice.object.Song;
 import de.hdodenhof.circleimageview.CircleImageView;
 import java.util.List;
 
-public class PlayFragment extends Fragment implements View.OnClickListener {
+public class PlayFragment extends Fragment implements View.OnClickListener,NextBackMedia {
     private static final String TAG = "PlayFragment";
     private static final String ARG_PARAM1 = "param1";
+    CarouselLayoutManager layoutManager;
     private int mParam1;
     private CircleImageView mCircleImageView;
     private ObjectAnimator mObjectAnimator;
     private RecyclerView mRecyclerView;
     private SongRecyclerViewAdapter mAdapter;
     private List<Song> mListSong;
+    private ChangViewPager mChangViewPager;
+    TextView tv_Singer,tv_Author;
     public static PlayFragment newInstance(int param1) {
         Log.d(TAG, "newInstance: ");
         PlayFragment fragment = new PlayFragment();
@@ -48,7 +54,7 @@ public class PlayFragment extends Fragment implements View.OnClickListener {
 
             mParam1 = getArguments().getInt(ARG_PARAM1);
             Log.d(TAG, "onCreate: "+mParam1);
-        }
+            }
     }
 
     @Override
@@ -64,7 +70,7 @@ public class PlayFragment extends Fragment implements View.OnClickListener {
 
     private void initListSong() {
         mAdapter=new SongRecyclerViewAdapter(mListSong,getContext());
-        final CarouselLayoutManager layoutManager = new CarouselLayoutManager(CarouselLayoutManager.HORIZONTAL);
+        layoutManager= new CarouselLayoutManager(CarouselLayoutManager.HORIZONTAL);
         mRecyclerView.setLayoutManager(layoutManager);
         mRecyclerView.setHasFixedSize(true);
         mRecyclerView.addOnScrollListener(new CenterScrollListener());
@@ -75,7 +81,13 @@ public class PlayFragment extends Fragment implements View.OnClickListener {
                 .OnCenterItemSelectionListener() {
             @Override
             public void onCenterItemChanged(int adapterPosition) {
-                Log.e("xxx","con cac");
+                if (adapterPosition!=mParam1) {
+                    mParam1=adapterPosition;
+                    mChangViewPager.setOnChangItem(mParam1);
+                    mCircleImageView.setImageBitmap(mListSong.get(mParam1).getImgSong());
+                    tv_Singer.setText(mListSong.get(mParam1).getSongName());
+                    tv_Author.setText(mListSong.get(mParam1).getSinger());
+                }
             }
         });
     }
@@ -84,9 +96,9 @@ public class PlayFragment extends Fragment implements View.OnClickListener {
         mCircleImageView = view.findViewById(R.id.image_circle);
         mCircleImageView.setImageBitmap(mListSong.get(mParam1).getImgSong());
         mRecyclerView=view.findViewById(R.id.rv_ImgSong);
-        TextView tv_Singer = view.findViewById(R.id.tv_PlaySinger);
+        tv_Singer = view.findViewById(R.id.tv_PlaySinger);
         tv_Singer.setText(mListSong.get(mParam1).getSongName());
-        TextView tv_Author = view.findViewById(R.id.tv_PlayAuthor);
+        tv_Author = view.findViewById(R.id.tv_PlayAuthor);
         tv_Author.setText(mListSong.get(mParam1).getSinger());
     }
 
@@ -105,4 +117,29 @@ public class PlayFragment extends Fragment implements View.OnClickListener {
 
     }
 
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        if (context instanceof ChangViewPager) {
+            mChangViewPager = (ChangViewPager) context;
+        } else {
+            throw new RuntimeException(
+                    context.toString() + " must implement OnFragmentInteractionListener");
+        }
+    }
+
+    @Override
+    public void onDetach() {
+        super.onDetach();
+        mChangViewPager = null;
+    }
+
+    @Override
+    public void onChangerSong(int value) {
+        Log.d(TAG, "onChangerSong: "+value);
+        //layoutManager.scrollToPosition(value);
+    }
+    public void changScoll(int value){
+        layoutManager.scrollToPosition(value);
+    }
 }

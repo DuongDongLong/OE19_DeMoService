@@ -15,7 +15,7 @@ public class RootFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
             @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.rootfragment, container, false);
-        getFragmentManager().beginTransaction().add(R.id.root_frame_layout,new EmplyFragment()).commit();
+        getFragmentManager().beginTransaction().add(R.id.root_frame_layout,PlayFragment.newInstance(1)).commit();
         return view;
     }
 }
